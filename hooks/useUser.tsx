@@ -1,23 +1,19 @@
 import { auth } from "@util/firebase";
 import {
-	createUserWithEmailAndPassword,
 	onAuthStateChanged,
 	sendEmailVerification,
-	sendPasswordResetEmail,
 	signInWithEmailAndPassword,
 	signOut,
 	User
 } from "firebase/auth";
+import nookies from "nookies";
 import { createContext, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import nookies from "nookies";
 
 type ContextValue = {
 	currentUser?: User;
 	loading?: boolean;
 	login?: (email: string, password: string) => Promise<any>;
-	signup?: (email: string, password: string) => Promise<any>;
-	reset?: (email: string) => Promise<any>;
 	logout?: () => Promise<void>;
 };
 
@@ -33,14 +29,6 @@ export function AuthProvider({ children }) {
 
 	const login = async (email: string, password: string) => {
 		return signInWithEmailAndPassword(auth, email, password);
-	};
-
-	const signup = async (email: string, password: string) => {
-		return createUserWithEmailAndPassword(auth, email, password);
-	};
-
-	const reset = async (email: string) => {
-		return sendPasswordResetEmail(auth, email);
 	};
 
 	const logout = async () => {
@@ -85,7 +73,7 @@ export function AuthProvider({ children }) {
 	}, []);
 
 	return (
-		<AuthContext.Provider value={{ currentUser, login, logout, signup, reset, loading }}>
+		<AuthContext.Provider value={{ currentUser, login, logout, loading }}>
 			{children}
 		</AuthContext.Provider>
 	);

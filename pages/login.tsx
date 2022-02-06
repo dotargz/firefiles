@@ -1,10 +1,19 @@
-import { Alert, AlertIcon, Box, Button, chakra, FormControl, Input, Text } from "@chakra-ui/react";
+import {
+	Alert,
+	AlertIcon,
+	Box,
+	Button,
+	chakra,
+	FormControl,
+	Input,
+	Link,
+	Text
+} from "@chakra-ui/react";
 import CenterContainer from "@components/ui/CenterContainer";
 import PasswordInput from "@components/ui/PasswordInput";
 import useUser from "@hooks/useUser";
 import { sendEvent } from "@util/firebase";
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -86,15 +95,16 @@ export default function Login() {
 							Login
 						</Button>
 						<Text as="p" fontSize="xs" align="center">
-							Don't have an account?{" "}
-							<Link href="/signup">
-								<chakra.span textDecor="underline" cursor="pointer">
-									Sign Up
-								</chakra.span>
-							</Link>
-						</Text>
-						<Text as="p" fontSize="xs" textDecor="underline" cursor="pointer" align="center">
-							<Link href="/forgot-password">Forgot Password?</Link>
+							Check out the{" "}
+							<Link
+								href="https://firefiles.vercel.app/docs/self-hosted/01-setup#authentication-and-cloud-storage"
+								target="_blank"
+								textDecor="underline"
+								cursor="pointer"
+							>
+								docs
+							</Link>{" "}
+							for account-related info.
 						</Text>
 					</Box>
 				</Box>
